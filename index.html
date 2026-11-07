@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رزق | RZG - من يد المنتج المحلي إلى كل مكان</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo & Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for iconography -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ivory': '#FAF7F2',
+                        'ivory-card': '#F2EDE4',
+                        'forest': '#112D25',
+                        'forest-light': '#1A3F35',
+                        'forest-dark': '#0B1E19',
+                        'lime-accent': '#97D700',
+                        'lime-hover': '#84BD00',
+                        'clay': '#C87D55',
+                        'clay-light': '#E8A580',
+                        'sand-text': '#5A625C'
+                    },
+                    fontFamily: {
+                        sans: ['Cairo', 'Tajawal', 'sans-serif'],
+                        heading: ['Tajawal', 'Cairo', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FAF7F2;
+            color: #112D25;
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Custom Asymmetrical SVG Parcel Line Animation */
+        .parcel-path {
+            stroke-dasharray: 8 8;
+            animation: dash 30s linear infinite;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -1000;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF7F2;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #112D25;
+            border-radius: 4px;
+        }
+
+        /* Hero Text Stroke */
+        .text-outline {
+            -webkit-text-stroke: 1.5px #112D25;
+            color: transparent;
+        }
+
+        /* Digital Card Effects */
+        .card-metallic {
+            background: linear-gradient(135deg, #112D25 0%, #1A3F35 60%, #0B1E19 100%);
+            position: relative;
+        }
+        .card-metallic::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(151, 215, 0, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-lime-accent selection:text-forest">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 bg-ivory/90 backdrop-blur-md border-b border-forest/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 bg-forest text-lime-accent flex items-center justify-center font-extrabold text-2xl rounded-br-2xl rounded-tl-2xl shadow-md transform group-hover:rotate-3 transition-transform">
+                    ر
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-black tracking-tight text-forest leading-none">رزق</span>
+                    <span class="text-[10px] font-bold text-clay tracking-widest leading-tight mt-1">RZG PLATFORM</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-semibold text-forest/80 text-sm">
+                <a href="#about" class="hover:text-forest transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-lime-accent hover:after:w-full after:transition-all">عن منصة رزق</a>
+                <a href="#journey" class="hover:text-forest transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-lime-accent hover:after:w-full after:transition-all">رحلة العضوية</a>
+                <a href="#spl-info" class="hover:text-forest transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-lime-accent hover:after:w-full after:transition-all">الشحن مع سُبل</a>
+                <a href="#faq" class="hover:text-forest transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-lime-accent hover:after:w-full after:transition-all">الأسئلة الشائعة</a>
+            </nav>
+
+            <!-- Action Button -->
+            <div class="flex items-center gap-4">
+                <button onclick="openRegistrationModal()" class="bg-forest text-ivory px-6 py-2.5 rounded-full font-bold text-sm hover:bg-forest-light hover:text-lime-accent transition-all duration-300 shadow-md flex items-center gap-2 group">
+                    <span>انضم الآن</span>
+                    <i class="fa-solid font-xs fa-arrow-left transition-transform group-hover:-translate-x-1"></i>
+                </button>
+                <button id="menuBtn" onclick="toggleMobileMenu()" class="md:hidden text-forest text-2xl p-1 focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-ivory border-b border-forest/10 px-6 py-4 flex flex-col gap-4 font-semibold">
+            <a href="#about" onclick="toggleMobileMenu()" class="text-forest hover:text-clay py-1">عن منصة رزق</a>
+            <a href="#journey" onclick="toggleMobileMenu()" class="text-forest hover:text-clay py-1">رحلة العضوية</a>
+            <a href="#spl-info" onclick="toggleMobileMenu()" class="text-forest hover:text-clay py-1">الشحن مع سُبل</a>
+            <a href="#faq" onclick="toggleMobileMenu()" class="text-forest hover:text-clay py-1">الأسئلة الشائعة</a>
+        </div>
+    </header>
+
+    <!-- Background Route Visual / Animated SVG Path Across Page -->
+    <div class="fixed inset-0 pointer-events-none z-0 opacity-15 overflow-hidden">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <path class="parcel-path" d="M -100 100 Q 400 300 200 600 T 800 1000 T 300 1400 T 1200 1800" fill="none" stroke="#112D25" stroke-width="3"/>
+        </svg>
+    </div>
+
+    <main class="relative z-10 flex-grow">
+
+        <!-- Hero Section: Editorial & Asymmetrical -->
+        <section class="max-w-7xl mx-auto px-6 pt-12 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Hero Content (7 Cols) -->
+            <div class="lg:col-span-7 space-y-8">
+                
+                <div class="inline-flex items-center gap-3 bg-ivory-card border border-forest/15 px-4 py-2 rounded-full text-xs font-bold text-forest">
+                    <span class="w-2.5 h-2.5 rounded-full bg-lime-accent animate-pulse"></span>
+                    <span>المنصة الوطنية لربط المنتجين المحليين بخدمات الشحن</span>
+                </div>
+
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-forest leading-[1.1] tracking-tight">
+                    صُنع هنا…<br>
+                    <span class="text-clay">وطريقهُ أبعد</span>
+                </h1>
+
+                <p class="text-lg sm:text-xl text-sand-text max-w-2xl font-medium leading-relaxed">
+                    «من يد المنتج المحلي إلى كل مكان» — انطلق بمنتجاتك وافتح آفاقاً جديدة للتوسع والتوصيل، عبر منظومة تجمع المبدعين المحليين وتسهل ربطهم المباشر مع سُبل (SPL).
+                </p>
+
+                <!-- Pricing Highlight & CTA Box -->
+                <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-6">
+                    <button onclick="openRegistrationModal()" class="bg-forest text-lime-accent px-8 py-4 rounded-2xl font-extrabold text-lg shadow-xl hover:bg-forest-light hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 group">
+                        <span>ابدأ رحلتك الآن</span>
+                        <div class="w-8 h-8 rounded-full bg-lime-accent text-forest flex items-center justify-center font-bold text-sm group-hover:translate-x-[-4px] transition-transform">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </div>
+                    </button>
+
+                    <div class="bg-ivory-card border-r-4 border-lime-accent p-4 rounded-xl flex items-center gap-4">
+                        <div class="text-right">
+                            <div class="text-xs text-sand-text font-bold">رسوم العضوية السنوية</div>
+                            <div class="text-2xl font-black text-forest">٩٩ ريال <span class="text-xs font-normal text-sand-text">/ سنوياً</span></div>
+                        </div>
+                        <i class="fa-solid fa-shield-halved text-forest/30 text-2xl"></i>
+                    </div>
+                </div>
+
+                <div class="pt-2 flex items-center gap-6 text-xs font-bold text-sand-text">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-check text-lime-accent"></i>
+                        <span>إصدار بطاقة عضوية رسمية</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-check text-lime-accent"></i>
+                        <span>تعامل مباشر مع سُبل</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-check text-lime-accent"></i>
+                        <span>توثيق أصحاب العمل الحر</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Visual Frame (5 Cols) - Asymmetrical Editorial Artwork -->
+            <div class="lg:col-span-5 relative">
+                <div class="relative w-full aspect-[4/5] bg-forest rounded-3xl p-8 text-ivory shadow-2xl flex flex-col justify-between overflow-hidden border border-forest-light">
+                    
+                    <!-- Decorative Canvas Pattern -->
+                    <div class="absolute -top-24 -left-24 w-64 h-64 bg-lime-accent/10 rounded-full filter blur-3xl"></div>
+                    <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-clay/20 rounded-full filter blur-3xl"></div>
+
+                    <!-- Editorial Parcel Graphic (Custom SVG) -->
+                    <div class="relative z-10 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-lime-accent tracking-widest uppercase">RZG-NATIONAL-ROUTE</span>
+                            <h3 class="text-2xl font-bold mt-1">مسار الطرد المحلي</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-full border border-ivory/20 flex items-center justify-center font-mono text-lime-accent text-sm">
+                            01
+                        </div>
+                    </div>
+
+                    <!-- Center Abstract Illustration -->
+                    <div class="relative z-10 my-auto flex flex-col items-center text-center py-6">
+                        <div class="w-36 h-36 border-2 border-dashed border-lime-accent/40 rounded-full flex items-center justify-center p-4 relative">
+                            <div class="w-24 h-24 bg-clay rounded-2xl rotate-12 flex items-center justify-center text-ivory shadow-lg">
+                                <i class="fa-solid fa-box-open text-4xl transform -rotate-12"></i>
+                            </div>
+                            <div class="absolute -bottom-2 -right-2 bg-lime-accent text-forest font-black text-xs px-3 py-1 rounded-full shadow">
+                                صُنع بحُب
+                            </div>
+                        </div>
+                        <p class="mt-6 text-sm text-ivory/80 font-medium max-w-xs">
+                            نربط الأيدي المبدعة في كافة مناطق المملكة بخطوط الشحن اللوجستية المباشرة.
+                        </p>
+                    </div>
+
+                    <!-- Bottom Card Footer Info -->
+                    <div class="relative z-10 border-t border-ivory/10 pt-4 flex justify-between items-center text-xs text-ivory/60">
+                        <span>هوية رقمية معتمدة</span>
+                        <span class="font-bold text-lime-accent">رزق x سُبل</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Stats Banner (Editorial Layout) -->
+        <section class="bg-forest text-ivory py-12">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x-0 md:divide-x md:divide-x-reverse divide-forest-light">
+                <div class="space-y-1">
+                    <div class="text-3xl sm:text-4xl font-black text-lime-accent">100%</div>
+                    <div class="text-xs text-ivory/70 font-semibold">إنتاج وطني محلي</div>
+                </div>
+                <div class="space-y-1">
+                    <div class="text-3xl sm:text-4xl font-black text-ivory">٩٩ ر.س</div>
+                    <div class="text-xs text-ivory/70 font-semibold">اشتراك سنوي فقط</div>
+                </div>
+                <div class="space-y-1">
+                    <div class="text-3xl sm:text-4xl font-black text-lime-accent">مباشر</div>
+                    <div class="text-xs text-ivory/70 font-semibold">ربط مع حسابك في سُبل</div>
+                </div>
+                <div class="space-y-1">
+                    <div class="text-3xl sm:text-4xl font-black text-ivory">شامل</div>
+                    <div class="text-xs text-ivory/70 font-semibold">لكافة مناطق المملكة</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Membership Journey Section (رحلة الانضمام إلى رزق) -->
+        <section id="journey" class="max-w-7xl mx-auto px-6 py-24">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div class="space-y-3">
+                    <span class="text-xs font-bold text-clay tracking-wider">خطوات واضحة وسريعة</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-forest">رحلة الانضمام إلى منصة رزق</h2>
+                </div>
+                <p class="text-sand-text text-sm max-w-md font-medium">
+                    تم تصميم الرحلة لتكون سهلة وبسيطة من لحظة التسجيل وحتى إصدار بطاقة العضوية الخاصة بك لبدء الشحن مع سُبل.
+                </p>
+            </div>
+
+            <!-- Steps Grid (Asymmetrical Steps) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Step 1 -->
+                <div class="bg-ivory-card border border-forest/10 rounded-3xl p-8 relative hover:border-forest/30 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 bg-forest text-lime-accent rounded-2xl flex items-center justify-center font-bold text-xl mb-6 group-hover:scale-110 transition-transform">
+                            01
+                        </div>
+                        <h3 class="text-xl font-bold text-forest mb-3">التسجيل والتحقق</h3>
+                        <p class="text-sand-text text-sm leading-relaxed">
+                            أدخل رقم الجوال لإنشاء حسابك وتلقي رمز التحقق السريع لضمان أمان بياناتك.
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-forest/5 flex items-center justify-between text-xs font-bold text-clay">
+                        <span>الخطوة الأولى</span>
+                        <i class="fa-solid fa-mobile-screen"></i>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-ivory-card border border-forest/10 rounded-3xl p-8 relative hover:border-forest/30 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 bg-forest text-lime-accent rounded-2xl flex items-center justify-center font-bold text-xl mb-6 group-hover:scale-110 transition-transform">
+                            02
+                        </div>
+                        <h3 class="text-xl font-bold text-forest mb-3">بيانات النشاط والوثائق</h3>
+                        <p class="text-sand-text text-sm leading-relaxed">
+                            أدرج بيانات مشروعك التجاري (وثيقة العمل الحر أو السجل التجاري) لتوثيق نشاطك.
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-forest/5 flex items-center justify-between text-xs font-bold text-clay">
+                        <span>الخطوة الثانية</span>
+                        <i class="fa-solid fa-file-signature"></i>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-forest text-ivory rounded-3xl p-8 relative shadow-xl flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 bg-lime-accent text-forest rounded-2xl flex items-center justify-center font-bold text-xl mb-6 group-hover:scale-110 transition-transform">
+                            03
+                        </div>
+                        <h3 class="text-xl font-bold text-lime-accent mb-3">دفع العضوية وإصدار البطاقة</h3>
+                        <p class="text-ivory/80 text-sm leading-relaxed">
+                            سدد رسوم العضوية (٩٩ ريال سنوياً) واستلم فوراً رقم عضويتك الرقمي للبدء في استخدام خدمات الشحن مع سُبل.
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-ivory/10 flex items-center justify-between text-xs font-bold text-lime-accent">
+                        <span>إكمال الرحلة</span>
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Start Journey Trigger Banner -->
+            <div class="mt-12 text-center">
+                <button onclick="openRegistrationModal()" class="inline-flex items-center gap-3 bg-clay text-ivory px-8 py-3.5 rounded-full font-bold shadow-lg hover:bg-clay/90 transition-all">
+                    <span>التسجيل في منصة رزق</span>
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
+
+        </section>
+
+        <!-- Business Model Clarification / SPL Integration Section -->
+        <section id="spl-info" class="bg-ivory-card border-y border-forest/10 py-24 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-xs font-bold text-forest bg-lime-accent/30 px-3 py-1 rounded-full">شفافية نموذج العمل</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-forest leading-tight">
+                        كيف تعمل منصة رزق مع البريد السعودي (سُبل)؟
+                    </h2>
+                    
+                    <div class="space-y-4 text-sand-text text-sm leading-relaxed">
+                        <p>
+                            تسعى منصة <strong class="text-forest">رزق</strong> إلى تنظيم ودعم المنتجين المحليين وأصحاب الأعمال الحرّة عبر تزويدهم بهوية عضوية موثوقة.
+                        </p>
+                        <div class="p-4 bg-ivory rounded-2xl border-r-4 border-clay space-y-2">
+                            <div class="font-bold text-forest text-base">توضيح مهم بشأن الرسوم والتعامل:</div>
+                            <ul class="list-disc list-inside space-y-1 text-xs">
+                                <li>رسوم المنصة هي <strong class="text-forest">99 ريال سعودي فقط سنوياً</strong> مقابل العضوية والتوثيق وإصدار البطاقة.</li>
+                                <li>بعد الحصول على رقم العضوية، يتعامل العضو <strong class="text-forest">مباشرة مع سُبل (SPL)</strong> لإتمام عمليات الشحن.</li>
+                                <li>يتم سداد تكاليف الشحن وتفاصيل الطرود مباشرة إلى سُبل بحسب تعريفتهم وقنواتهم الرسمية.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6">
+                    <div class="bg-ivory p-8 rounded-3xl border border-forest/15 shadow-sm space-y-6">
+                        <div class="flex items-center gap-4 border-b border-forest/10 pb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-forest text-lime-accent flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-forest">خطوات الشحن بعد تفعيل العضوية</h4>
+                                <span class="text-xs text-sand-text">مسار بسيط ومباشر</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 text-xs font-semibold text-forest">
+                            <div class="flex items-center gap-3 p-3 bg-ivory-card rounded-xl">
+                                <span class="w-6 h-6 rounded-full bg-forest text-ivory flex items-center justify-center text-[10px]">1</span>
+                                <span>انسخ رقم عضوية رزق الموثق الخاصة بك</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-ivory-card rounded-xl">
+                                <span class="w-6 h-6 rounded-full bg-forest text-ivory flex items-center justify-center text-[10px]">2</span>
+                                <span>توجه لقنوات سُبل الرسمية وقدم رقم العضوية عند طلب الخدمة</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-ivory-card rounded-xl">
+                                <span class="w-6 h-6 rounded-full bg-forest text-ivory flex items-center justify-center text-[10px]">3</span>
+                                <span>ادفع رسوم الشحن مباشرة لسُبل واشحن منتجك لأي مكان</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="max-w-5xl mx-auto px-6 py-24">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-xs font-bold text-clay tracking-widest">إجابات استفساراتكم</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-forest">الأسئلة الشائعة</h2>
+            </div>
+
+            <div class="space-y-4" id="faqAccordion">
+                
+                <!-- Q1 -->
+                <div class="bg-ivory-card border border-forest/10 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(1)" class="w-full p-6 text-right font-bold text-forest text-lg flex items-center justify-between gap-4">
+                        <span>ما هي تكلفة الاشتراك في منصة رزق؟</span>
+                        <i id="faq-icon-1" class="fa-solid fa-chevron-down text-clay transition-transform"></i>
+                    </button>
+                    <div id="faq-answer-1" class="hidden px-6 pb-6 text-sand-text text-sm leading-relaxed border-t border-forest/5 pt-4">
+                        تكلفة الاشتراك السنوي في منصة رزق هي ٩٩ ريال سعودي فقط لا غير. تُسدد عند التسجيل وتُجدد سنوياً للاستفادة من بطاقة العضوية والخدمات المرتبطة بالمنصة.
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="bg-ivory-card border border-forest/10 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(2)" class="w-full p-6 text-right font-bold text-forest text-lg flex items-center justify-between gap-4">
+                        <span>هل تشمل الـ 99 ريال رسوم شحن الطرود؟</span>
+                        <i id="faq-icon-2" class="fa-solid fa-chevron-down text-clay transition-transform"></i>
+                    </button>
+                    <div id="faq-answer-2" class="hidden px-6 pb-6 text-sand-text text-sm leading-relaxed border-t border-forest/5 pt-4">
+                        لا، الـ 99 ريال هي رسوم العضوية السنوية والتوثيق فقط. أما رسوم الشحن فتدفع بشكل مستقل ومباشر لشركة سُبل (البريد السعودي) بناءً على وزن ونوع الطرد ووجهة الشحن.
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="bg-ivory-card border border-forest/10 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(3)" class="w-full p-6 text-right font-bold text-forest text-lg flex items-center justify-between gap-4">
+                        <span>ما هي الوثائق المطلوبة للتسجيل في رزق؟</span>
+                        <i id="faq-icon-3" class="fa-solid fa-chevron-down text-clay transition-transform"></i>
+                    </button>
+                    <div id="faq-answer-3" class="hidden px-6 pb-6 text-sand-text text-sm leading-relaxed border-t border-forest/5 pt-4">
+                        يلزمك توفير وثيقة عمل حر سارية المفعول أو سجل تجاري للمشروع، بالإضافة إلى رقم جوال سعودي مفعّل لربطه بالحساب.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- INTERACTIVE MEMBERSHIP REGISTRATION MODAL / DRAWER -->
+    <div id="registrationModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-forest/70 backdrop-blur-sm transition-opacity">
+        <div class="bg-ivory w-full max-w-2xl rounded-3xl shadow-2xl border border-forest/20 overflow-hidden flex flex-col max-h-[90vh]">
+            
+            <!-- Modal Header with Progress Indicator -->
+            <div class="bg-forest text-ivory p-6 border-b border-forest-light relative">
+                <button onclick="closeRegistrationModal()" class="absolute left-6 top-6 text-ivory/60 hover:text-lime-accent text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-lime-accent text-forest font-black flex items-center justify-center">ر</div>
+                    <div>
+                        <h3 class="font-black text-lg">رحلة الانضمام إلى رزق</h3>
+                        <p class="text-xs text-ivory/70">خطوات بسيطة لإصدار عضويتك</p>
+                    </div>
+                </div>
+
+                <!-- Progress Steps Bar -->
+                <div class="mt-6 flex items-center justify-between text-xs font-bold relative">
+                    <div class="absolute top-1/2 right-0 left-0 h-0.5 bg-ivory/20 -translate-y-1/2 z-0"></div>
+                    <div id="progressLine" class="absolute top-1/2 right-0 h-0.5 bg-lime-accent -translate-y-1/2 z-0 transition-all duration-300" style="width: 0%;"></div>
+
+                    <div class="relative z-10 flex flex-col items-center gap-1">
+                        <div id="step-dot-1" class="w-7 h-7 rounded-full bg-lime-accent text-forest flex items-center justify-center text-xs font-bold">1</div>
+                        <span class="text-[10px] text-lime-accent">التحقق</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center gap-1">
+                        <div id="step-dot-2" class="w-7 h-7 rounded-full bg-forest-light border-2 border-ivory/30 text-ivory flex items-center justify-center text-xs font-bold">2</div>
+                        <span class="text-[10px] text-ivory/60">البيانات</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center gap-1">
+                        <div id="step-dot-3" class="w-7 h-7 rounded-full bg-forest-light border-2 border-ivory/30 text-ivory flex items-center justify-center text-xs font-bold">3</div>
+                        <span class="text-[10px] text-ivory/60">المراجعة</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center gap-1">
+                        <div id="step-dot-4" class="w-7 h-7 rounded-full bg-forest-light border-2 border-ivory/30 text-ivory flex items-center justify-center text-xs font-bold">4</div>
+                        <span class="text-[10px] text-ivory/60">الدفع</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center gap-1">
+                        <div id="step-dot-5" class="w-7 h-7 rounded-full bg-forest-light border-2 border-ivory/30 text-ivory flex items-center justify-center text-xs font-bold">5</div>
+                        <span class="text-[10px] text-ivory/60">العضوية</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Form Body (Scrollable) -->
+            <div class="p-6 overflow-y-auto flex-grow">
+                
+                <!-- STEP 1: Phone Verification -->
+                <div id="wizardStep1" class="space-y-6">
+                    <div class="text-center space-y-2">
+                        <h4 class="text-xl font-bold text-forest">أدخل رقم الجوال</h4>
+                        <p class="text-xs text-sand-text">سيتم إرسال رمز التحقق لمرة واحدة إلى جوالك</p>
+                    </div>
+
+                    <div class="space-y-4 max-w-sm mx-auto">
+                        <div>
+                            <label class="block text-xs font-bold text-forest mb-2">رقم الجوال (السعودية)</label>
+                            <div class="relative dir-ltr">
+                                <input type="tel" id="userPhone" placeholder="5X XXX XXXX" class="w-full pl-16 pr-4 py-3 bg-ivory-card border border-forest/20 rounded-xl font-bold text-forest text-right focus:outline-none focus:border-forest" value="501234567">
+                                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-sand-text border-r border-forest/10 pr-2">+966</span>
+                            </div>
+                        </div>
+
+                        <!-- OTP Code Simulated Entry -->
+                        <div id="otpBox" class="space-y-2">
+                            <label class="block text-xs font-bold text-forest">رمز التحقق (تم تعبئته افتراضياً)</label>
+                            <div class="flex justify-center gap-2 dir-ltr">
+                                <input type="text" maxlength="1" value="4" class="w-12 h-12 text-center bg-ivory-card border border-forest/20 rounded-xl font-black text-xl text-forest">
+                                <input type="text" maxlength="1" value="8" class="w-12 h-12 text-center bg-ivory-card border border-forest/20 rounded-xl font-black text-xl text-forest">
+                                <input type="text" maxlength="1" value="2" class="w-12 h-12 text-center bg-ivory-card border border-forest/20 rounded-xl font-black text-xl text-forest">
+                                <input type="text" maxlength="1" value="9" class="w-12 h-12 text-center bg-ivory-card border border-forest/20 rounded-xl font-black text-xl text-forest">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Business Info & Documents -->
+                <div id="wizardStep2" class="hidden space-y-6">
+                    <div class="space-y-1">
+                        <h4 class="text-xl font-bold text-forest">بيانات النشاط التجاري</h4>
+                        <p class="text-xs text-sand-text">أدخل تفاصيل وثيقتك الرسمية لتوثيق الحساب في رزق</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-forest mb-1">نوع الوثيقة</label>
+                            <select id="docType" class="w-full p-3 bg-ivory-card border border-forest/20 rounded-xl font-semibold text-forest text-sm focus:outline-none">
+                                <option value="freelance">وثيقة عمل حر</option>
+                                <option value="cr">سجل تجاري</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-forest mb-1">رقم الوثيقة / السجل</label>
+                            <input type="text" id="docNumber" value="FL-8894021" class="w-full p-3 bg-ivory-card border border-forest/20 rounded-xl font-semibold text-forest text-sm focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-forest mb-1">اسم المتجر / النشاط المحلي</label>
+                            <input type="text" id="storeName" value="متجر الفخار المحلي" class="w-full p-3 bg-ivory-card border border-forest/20 rounded-xl font-semibold text-forest text-sm focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-forest mb-1">المنطقة / المدينة</label>
+                            <select class="w-full p-3 bg-ivory-card border border-forest/20 rounded-xl font-semibold text-forest text-sm focus:outline-none">
+                                <option>الرياض</option>
+                                <option>مكة المكرمة</option>
+                                <option selected>عسير (أبها)</option>
+                                <option>الشرقية</option>
+                                <option>القصيم</option>
+                                <option>مدن أخرى</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Review Details -->
+                <div id="wizardStep3" class="hidden space-y-6">
+                    <div class="space-y-1">
+                        <h4 class="text-xl font-bold text-forest">مراجعة بيانات الطلب</h4>
+                        <p class="text-xs text-sand-text">تأكد من صحة البيانات قبل الانتقال لسداد العضوية</p>
+                    </div>
+
+                    <div class="bg-ivory-card p-6 rounded-2xl border border-forest/10 space-y-3 text-sm">
+                        <div class="flex justify-between border-b border-forest/10 pb-2">
+                            <span class="text-sand-text">رقم الجوال:</span>
+                            <span class="font-bold text-forest" id="summaryPhone">0501234567</span>
+                        </div>
+                        <div class="flex justify-between border-b border-forest/10 pb-2">
+                            <span class="text-sand-text">اسم النشاط:</span>
+                            <span class="font-bold text-forest" id="summaryStore">متجر الفخار المحلي</span>
+                        </div>
+                        <div class="flex justify-between border-b border-forest/10 pb-2">
+                            <span class="text-sand-text">نوع الوثيقة ورقمها:</span>
+                            <span class="font-bold text-forest" id="summaryDoc">وثيقة عمل حر (FL-8894021)</span>
+                        </div>
+                        <div class="flex justify-between pt-1">
+                            <span class="text-sand-text">رسوم العضوية:</span>
+                            <span class="font-black text-clay">٩٩ ريال سعودي / سنوياً</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-lime-accent/20 rounded-xl border border-lime-accent/40 text-xs text-forest space-y-1">
+                        <div class="font-bold">ملاحظة تنظيمية:</div>
+                        <div>إكمال هذه الخطوة يعني الموافقة على الشروط، وأن رسوم الشحن المستقلة تُسدد مباشرة لشركة سُبل.</div>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Payment (99 SAR) -->
+                <div id="wizardStep4" class="hidden space-y-6">
+                    <div class="text-center space-y-1">
+                        <h4 class="text-xl font-bold text-forest">دفع قيمة العضوية</h4>
+                        <div class="text-3xl font-black text-forest mt-2">٩٩ ر.س <span class="text-xs text-sand-text font-normal">/ سنوياً</span></div>
+                    </div>
+
+                    <!-- Simulated Mada / Credit Payment -->
+                    <div class="space-y-4 max-w-md mx-auto">
+                        <div class="flex gap-4">
+                            <button type="button" class="flex-1 py-3 bg-forest text-lime-accent font-bold rounded-xl border border-forest text-xs flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-credit-card"></i>
+                                <span>مدى / بطاقة ائتمان</span>
+                            </button>
+                            <button type="button" class="flex-1 py-3 bg-ivory-card text-forest font-bold rounded-xl border border-forest/20 text-xs flex items-center justify-center gap-2 opacity-60">
+                                <i class="fa-brands fa-apple"></i>
+                                <span>Apple Pay</span>
+                            </button>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-forest mb-1">رقم البطاقة (تجريبي)</label>
+                            <input type="text" value="4111 •••• •••• 1111" class="w-full p-3 bg-ivory-card border border-forest/20 rounded-xl font-bold text-forest text-sm dir-ltr text-right" readonly>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-forest mb-1">تاريخ الانتهاء</label>
+                                <input type="text" value="12/28" class="w-full p-3 bg-ivory-card border border-forest/20 rounded-xl font-bold text-forest text-sm text-center" readonly>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-forest mb-1">رمز CVC</label>
+                                <input type="text" value="888" class="w-full p-3 bg-ivory-card border border-forest/20 rounded-xl font-bold text-forest text-sm text-center" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 5: Digital Membership Card Generated -->
+                <div id="wizardStep5" class="hidden space-y-6">
+                    <div class="text-center space-y-1">
+                        <div class="w-12 h-12 bg-lime-accent text-forest rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-2 animate-bounce">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h4 class="text-2xl font-black text-forest">تمت العضوية بنجاح!</h4>
+                        <p class="text-xs text-sand-text">بطاقة عضويتك في منصة رزق جاهزة الآن للاستخدام مع سُبل</p>
+                    </div>
+
+                    <!-- Digital RZG Card Visual -->
+                    <div class="card-metallic rounded-3xl p-6 text-ivory shadow-2xl space-y-6 border border-lime-accent/30 relative overflow-hidden">
+                        <div class="flex justify-between items-start">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 bg-lime-accent text-forest font-black rounded-lg flex items-center justify-center text-base">ر</div>
+                                <span class="font-black text-lg tracking-wide">رزق | RZG</span>
+                            </div>
+                            <span class="bg-lime-accent/20 text-lime-accent text-[10px] font-bold px-3 py-1 rounded-full border border-lime-accent/30">عضوية مفعّلة</span>
+                        </div>
+
+                        <div class="space-y-1 pt-2">
+                            <div class="text-[10px] text-ivory/60">رقم العضوية المعتمد:</div>
+                            <div class="text-2xl font-mono font-black text-lime-accent tracking-wider" id="generatedCardId">RZG-8849-SA</div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 border-t border-ivory/10 pt-4 text-xs">
+                            <div>
+                                <span class="text-ivory/50 block text-[10px]">صاحب العضوية</span>
+                                <span class="font-bold text-ivory" id="cardHolderName">متجر الفخار المحلي</span>
+                            </div>
+                            <div>
+                                <span class="text-ivory/50 block text-[10px]">تاريخ الانتهاء</span>
+                                <span class="font-bold text-ivory">نوفمبر 2027</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Link to SPL -->
+                    <div class="bg-ivory-card p-4 rounded-2xl border border-forest/10 space-y-2 text-center">
+                        <div class="text-xs font-bold text-forest">خطوتك القادمة للشحن:</div>
+                        <p class="text-xs text-sand-text">يمكنك الآن التوجه لموقع أو تطبيق سُبل وتقديم رقم العضوية أعلاه لبدء إجراءات شحن منتجاتك.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer Controls -->
+            <div class="bg-ivory-card p-6 border-t border-forest/10 flex justify-between items-center" id="modalControls">
+                <button id="prevBtn" onclick="prevStep()" class="px-5 py-2.5 rounded-xl font-bold text-xs text-forest hover:bg-forest/5 transition-all opacity-0 pointer-events-none">
+                    السابق
+                </button>
+                <button id="nextBtn" onclick="nextStep()" class="bg-forest text-lime-accent px-8 py-3 rounded-xl font-bold text-xs shadow-md hover:bg-forest-light transition-all flex items-center gap-2">
+                    <span>الانتقال للبيانات</span>
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-forest text-ivory border-t border-forest-light py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-lime-accent text-forest font-black flex items-center justify-center text-xl rounded-br-xl rounded-tl-xl">
+                        ر
+                    </div>
+                    <span class="text-2xl font-black">رزق | RZG</span>
+                </div>
+                <p class="text-xs text-ivory/70 leading-relaxed">
+                    المنصة التحريرية الوطنية لربط المنتجين المحليين بخدمات الشحن اللوجستية المباشرة مع البريد السعودي (سُبل).
+                </p>
+            </div>
+
+            <div>
+                <h5 class="font-bold text-sm text-lime-accent mb-4">روابط سريعة</h5>
+                <ul class="space-y-2 text-xs text-ivory/80 font-medium">
+                    <li><a href="#about" class="hover:text-lime-accent transition-colors">عن منصة رزق</a></li>
+                    <li><a href="#journey" class="hover:text-lime-accent transition-colors">رحلة العضوية</a></li>
+                    <li><a href="#spl-info" class="hover:text-lime-accent transition-colors">الشحن مع سُبل</a></li>
+                    <li><a href="#faq" class="hover:text-lime-accent transition-colors">الأسئلة الشائعة</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="font-bold text-sm text-lime-accent mb-4">نموذج العمل</h5>
+                <ul class="space-y-2 text-xs text-ivory/80 font-medium">
+                    <li>رسوم العضوية: ٩٩ ر.س / سنوياً</li>
+                    <li>توثيق وثيقة العمل الحر</li>
+                    <li>توثيق السجلات التجارية</li>
+                    <li>الربط المباشر مع سُبل</li>
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="font-bold text-sm text-lime-accent mb-4">الدعم والتواصل</h5>
+                <div class="space-y-2 text-xs text-ivory/80">
+                    <div>المملكة العربية السعودية</div>
+                    <div class="font-mono">support@rzg.sa</div>
+                    <div class="pt-2 flex gap-3 text-base text-lime-accent">
+                        <a href="#" class="hover:text-ivory"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="hover:text-ivory"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-ivory"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 pt-6 border-t border-ivory/10 flex flex-col sm:flex-row items-center justify-between text-xs text-ivory/50 font-medium">
+            <div>© 2026 منصة رزق (RZG). جميع الحقوق محفوظة.</div>
+            <div class="mt-2 sm:mt-0">صُنع باحترافية للمنتج المحلي</div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // State management
+        let currentStep = 1;
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // FAQ Toggle
+        function toggleFaq(index) {
+            const answer = document.getElementById(`faq-answer-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                answer.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // Registration Modal Controls
+        function openRegistrationModal() {
+            document.getElementById('registrationModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            updateStepView();
+        }
+
+        function closeRegistrationModal() {
+            document.getElementById('registrationModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Wizard Step Navigation
+        function nextStep() {
+            if (currentStep < 5) {
+                currentStep++;
+                updateStepView();
+            } else {
+                closeRegistrationModal();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepView();
+            }
+        }
+
+        function updateStepView() {
+            // Hide all steps
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`wizardStep${i}`).classList.add('hidden');
+                
+                // Update Step Dots Indicator
+                const dot = document.getElementById(`step-dot-${i}`);
+                if (i <= currentStep) {
+                    dot.classList.remove('bg-forest-light', 'border-2', 'border-ivory/30', 'text-ivory');
+                    dot.classList.add('bg-lime-accent', 'text-forest');
+                } else {
+                    dot.classList.remove('bg-lime-accent', 'text-forest');
+                    dot.classList.add('bg-forest-light', 'border-2', 'border-ivory/30', 'text-ivory');
+                }
+            }
+
+            // Show active step
+            document.getElementById(`wizardStep${currentStep}`).classList.remove('hidden');
+
+            // Update Progress Line Width
+            const progressPercent = ((currentStep - 1) / 4) * 100;
+                document.getElementById('progressLine').style.width = `${progressPercent}%`;
+
+            // Update Controls Buttons
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            if (currentStep === 1) {
+                prevBtn.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                prevBtn.classList.remove('opacity-0', 'pointer-events-none');
+            }
+
+            // Sync Summary text on Step 3
+            if (currentStep === 3) {
+                document.getElementById('summaryPhone').innerText = document.getElementById('userPhone').value || '0501234567';
+                document.getElementById('summaryStore').innerText = document.getElementById('storeName').value || 'متجر محلي';
+                const docTypeText = document.getElementById('docType').options[document.getElementById('docType').selectedIndex].text;
+                document.getElementById('summaryDoc').innerText = `${docTypeText} (${document.getElementById('docNumber').value || 'FL-0000'})`;
+            }
+
+            // Sync Card text on Step 5
+            if (currentStep === 5) {
+                document.getElementById('cardHolderName').innerText = document.getElementById('storeName').value || 'متجر محلي';
+                // Hide prev button on final step
+                prevBtn.classList.add('opacity-0', 'pointer-events-none');
+                nextBtn.innerHTML = `<span>إغلاق الشاشة</span> <i class="fa-solid fa-check"></i>`;
+            } else if (currentStep === 4) {
+                nextBtn.innerHTML = `<span>سداد 99 ر.س وتفعيل العضوية</span> <i class="fa-solid fa-lock"></i>`;
+            } else {
+                nextBtn.innerHTML = `<span>التالي</span> <i class="fa-solid fa-arrow-left"></i>`;
+            }
+        }
+    </script>
+</body>
+</html>
